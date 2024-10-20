@@ -6,7 +6,10 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
-        System.out.println(scanner.nextLine());
+
+        String N = scanner.nextLine();
+
+        System.out.println(N);
         scanner.close();
     }
 }
