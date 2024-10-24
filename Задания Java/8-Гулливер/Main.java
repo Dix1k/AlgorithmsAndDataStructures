@@ -1,4 +1,4 @@
-//https://acmp.ru/index.asp?main=task&id_task=773
+// https://acmp.ru/index.asp?main=task&id_task=773
 
 import java.util.Scanner;
 
