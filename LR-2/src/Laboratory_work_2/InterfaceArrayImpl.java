@@ -90,7 +90,7 @@ public class InterfaceArrayImpl implements InterfaceArray {
             }
         }
         // Возвращаем максимальное значение
-        return (maxMeaning);
+        return maxMeaning;
     }
 
     // Поиск минимального элемента в массиве
@@ -106,6 +106,6 @@ public class InterfaceArrayImpl implements InterfaceArray {
             }
         }
         // Возвращаем минимальное значение
-        return (minMeaning);
+        return minMeaning;
     }
 }
