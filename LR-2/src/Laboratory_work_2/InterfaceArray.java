@@ -6,6 +6,6 @@ public interface InterfaceArray {
     void delete(long value);
     void show();
     void getSize();
-    void findMax();
-    void findMin();
+    long findMax();
+    long findMin();
 }

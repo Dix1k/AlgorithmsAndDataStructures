@@ -35,11 +35,11 @@ public class InterfaceClient {
 
         // Находим и выводим максимальный элемент массива
         System.out.println("Максимальный элемент массива:");
-        array.findMax();
+        System.out.println(array.findMax());
 
         // Находим и выводим минимальный элемент массива
         System.out.println("Минимальный элемент массива:");
-        array.findMin();
+        System.out.println(array.findMin());
     }
 }
 

@@ -78,23 +78,23 @@ public class InterfaceArrayImpl implements InterfaceArray {
 
 
     // Поиск максимального элемента в массиве
-    public void findMax() {
+    public long findMax() {
         // Инициализируем переменную maxMeaning, которая будет хранить максимальное значение
-        int maxMeaning = 0;
+        long maxMeaning = 0;
         // Проходим по всем элементам массива до n
         for (int i = 0; i < n; i++) {
             // Если текущий элемент больше текущего максимального значения
             if (array[i] > maxMeaning) {
                 // Обновляем maxMeaning значением текущего элемента
-                maxMeaning = (int) array[i];
+                maxMeaning = array[i];
             }
         }
-        // Выводим максимальное значение
-        System.out.println(maxMeaning);
+        // Возвращаем максимальное значение
+        return (maxMeaning);
     }
 
     // Поиск минимального элемента в массиве
-    public void findMin() {
+    public long findMin() {
         // Инициализируем переменную minMeaning первым элементом массива
         long minMeaning = array[0];
         // Проходим по всем элементам массива до n
@@ -105,7 +105,7 @@ public class InterfaceArrayImpl implements InterfaceArray {
                 minMeaning = array[i];
             }
         }
-        // Выводим минимальное значение
-        System.out.println(minMeaning);
+        // Возвращаем минимальное значение
+        return (minMeaning);
     }
 }
