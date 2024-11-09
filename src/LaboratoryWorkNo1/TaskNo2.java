@@ -1,9 +1,11 @@
 // A+B
 // https://acmp.ru/index.asp?main=task&id_task=1
 
+package LaboratoryWorkNo1;
+
 import java.util.Scanner;
 
-public class Main {
+public class TaskNo2 {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);

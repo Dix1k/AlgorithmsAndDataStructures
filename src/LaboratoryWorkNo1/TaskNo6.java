@@ -1,9 +1,11 @@
 // Орешки
 // https://acmp.ru/index.asp?main=task&id_task=766
 
+package LaboratoryWorkNo1;
+
 import java.util.Scanner;
 
-public class Main {
+public class TaskNo6 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
