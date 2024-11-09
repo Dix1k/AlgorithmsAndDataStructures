@@ -1,3 +1,4 @@
+// Орешки
 // https://acmp.ru/index.asp?main=task&id_task=766
 
 import java.util.Scanner;

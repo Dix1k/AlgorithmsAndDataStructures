@@ -1,3 +1,4 @@
+// Эния
 // https://acmp.ru/index.asp?main=task&id_task=195
 
 import java.util.Scanner;

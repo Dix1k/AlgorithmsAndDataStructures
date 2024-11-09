@@ -1,3 +1,4 @@
+// Олимпиада
 // https://acmp.ru/index.asp?main=task&id_task=942
 
 import java.util.Arrays;
