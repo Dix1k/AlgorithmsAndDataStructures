@@ -1,4 +1,4 @@
-package BinSearch;
+package LaboratoryWorkNo3;
 
 import java.util.Random;
 

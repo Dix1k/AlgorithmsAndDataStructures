@@ -1,4 +1,4 @@
-package Laboratory_work_2;
+package LaboratoryWorkNo2;
 
 import java.util.Random;
 

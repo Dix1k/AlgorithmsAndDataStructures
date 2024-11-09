@@ -1,4 +1,4 @@
-package Laboratory_work_2;
+package LaboratoryWorkNo2;
 
 public class InterfaceArrayImpl implements InterfaceArray {
     // Объявляем приватное финальное поле array, представляющее массив типа long

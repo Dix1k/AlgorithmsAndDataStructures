@@ -1,4 +1,4 @@
-package BinSearch;
+package LaboratoryWorkNo3;
 
 public interface ArrayInterface {
     boolean contains(long searchValue);

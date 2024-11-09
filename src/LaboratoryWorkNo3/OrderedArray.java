@@ -1,4 +1,4 @@
-package BinSearch;
+package LaboratoryWorkNo3;
 
 public class OrderedArray extends ParentLongArray {
     // Конструктор класса OrderedArray, вызывающий конструктор родительского класса ParentLongArray

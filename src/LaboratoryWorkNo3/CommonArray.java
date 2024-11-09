@@ -1,4 +1,4 @@
-package BinSearch;
+package LaboratoryWorkNo3;
 
 public class CommonArray extends ParentLongArray {
     // Конструктор, инициализирует массив определенного размера

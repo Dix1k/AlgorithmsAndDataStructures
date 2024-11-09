@@ -1,4 +1,4 @@
-package Laboratory_work_2;
+package LaboratoryWorkNo2;
 
 public interface InterfaceArray {
     boolean find(long searchValue);

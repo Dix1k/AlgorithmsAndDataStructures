@@ -1,4 +1,4 @@
-package BinSearch;
+package LaboratoryWorkNo3;
 
 public abstract class ParentLongArray implements ArrayInterface {
     protected final long[] array;
