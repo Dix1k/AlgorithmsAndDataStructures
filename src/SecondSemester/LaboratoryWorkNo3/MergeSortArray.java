@@ -74,8 +74,4 @@ public class MergeSortArray {
     public int getSwaps() {
         return swaps;
     }
-
-    public long[] getData() {
-        return data;
-    }
 }
