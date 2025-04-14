@@ -16,11 +16,6 @@ public class OpenAddressingHashTable {
         return key % arraySize;
     }
 
-    // Функция для квадратичного пробирования
-    public int stepSizeCounter(int key, int i) {
-        return i * i;
-    }
-
     // Поиск элемента с заданным ключом
     public Item find(int key) {
         int hashVal = hashFunc(key);
@@ -31,7 +26,7 @@ public class OpenAddressingHashTable {
                 return hashArray[hashVal]; // Элемент найден
             }
             // Квадратичное пробирование
-            hashVal = (hashVal + stepSizeCounter(key, i)) % arraySize;
+            hashVal = (hashVal + i * i) % arraySize;
             i++;
             if (i >= arraySize) { // Предотвращение бесконечного цикла
                 break;
@@ -49,7 +44,7 @@ public class OpenAddressingHashTable {
         // Поиск пустой ячейки или ячейки с пометкой удаления
         while (hashArray[hashVal] != null && hashArray[hashVal].getKey() != -1) {
             // Квадратичное пробирование
-            hashVal = (hashVal + stepSizeCounter(key, i)) % arraySize;
+            hashVal = (hashVal + i * i) % arraySize;
             i++;
             if (i >= arraySize) { // Таблица заполнена
                 throw new RuntimeException("Hash table is full");
@@ -70,7 +65,7 @@ public class OpenAddressingHashTable {
                 return temp; // Возвращаем удаленный элемент
             }
             // Квадратичное пробирование
-            hashVal = (hashVal + stepSizeCounter(key, i)) % arraySize;
+            hashVal = (hashVal + i * i) % arraySize;
             i++;
             if (i >= arraySize) { // Предотвращение бесконечного цикла
                 break;
