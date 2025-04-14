@@ -18,7 +18,7 @@ public class OpenAddressingHashTable {
 
     // Функция для квадратичного пробирования
     public int stepSizeCounter(int key, int i) {
-        return i + i * i;
+        return i * i;
     }
 
     // Поиск элемента с заданным ключом
