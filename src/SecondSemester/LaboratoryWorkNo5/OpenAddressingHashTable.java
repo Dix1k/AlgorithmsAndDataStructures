@@ -1,131 +1,107 @@
 package LaboratoryWorkNo5;
 
 public class OpenAddressingHashTable {
-    private Link[] hashArray;
+    private Item[] hashArray;
     private int arraySize;
-    private int itemCount;
-    private static final double LOAD_FACTOR = 0.75;
-    private static final Link DELETED = new Link(-1); // Маркер для удаленных элементов
+    private Item deletedItem; // Маркер удаленного элемента
 
     public OpenAddressingHashTable(int size) {
-        arraySize = getNextPrime(size);
-        hashArray = new Link[arraySize];
-        itemCount = 0;
+        arraySize = size;
+        hashArray = new Item[arraySize];
+        deletedItem = new Item(-1); // Специальный объект для пометки удаленных элементов
     }
 
-    private int hashFunc(int key) {
+    // Хеш-функция (первое хеширование)
+    public int hashFunc(int key) {
         return key % arraySize;
     }
 
-    // Квадратичное пробирование
-    private int hashFunc(int key, int i) {
-        return (hashFunc(key) + i * i) % arraySize;
+    // Функция для квадратичного пробирования
+    public int stepSizeCounter(int key, int i) {
+        return i + i * i;
     }
 
-    public Link find(int key) {
-        int i = 0;
-        int hashVal = hashFunc(key, i);
+    // Поиск элемента с заданным ключом
+    public Item find(int key) {
+        int hashVal = hashFunc(key);
+        int i = 1;
 
-        while (hashArray[hashVal] != null && i < arraySize) {
-            if (hashArray[hashVal] != DELETED && hashArray[hashVal].getKey() == key) {
-                return hashArray[hashVal];
+        while (hashArray[hashVal] != null) {
+            if (hashArray[hashVal].getKey() == key && hashArray[hashVal].getKey() != -1) {
+                return hashArray[hashVal]; // Элемент найден
             }
+            // Квадратичное пробирование
+            hashVal = (hashVal + stepSizeCounter(key, i)) % arraySize;
             i++;
-            hashVal = hashFunc(key, i);
+            if (i >= arraySize) { // Предотвращение бесконечного цикла
+                break;
+            }
         }
-        return null;
+        return null; // Элемент не найден
     }
 
-    public void insert(Link theLink) {
-        if ((double)itemCount / arraySize >= LOAD_FACTOR) {
-            resize();
+    // Вставка элемента данных
+    public void insert(Item item) {
+        int key = item.getKey();
+        int hashVal = hashFunc(key);
+        int i = 1;
+
+        // Поиск пустой ячейки или ячейки с пометкой удаления
+        while (hashArray[hashVal] != null && hashArray[hashVal].getKey() != -1) {
+            // Квадратичное пробирование
+            hashVal = (hashVal + stepSizeCounter(key, i)) % arraySize;
+            i++;
+            if (i >= arraySize) { // Таблица заполнена
+                throw new RuntimeException("Hash table is full");
+            }
         }
+        hashArray[hashVal] = item; // Вставка элемента
+    }
 
-        int key = theLink.getKey();
-        int i = 0;
-        int hashVal = hashFunc(key, i);
+    // Удаление элемента данных
+    public Item delete(int key) {
+        int hashVal = hashFunc(key);
+        int i = 1;
 
-        while (hashArray[hashVal] != null && hashArray[hashVal] != DELETED) {
+        while (hashArray[hashVal] != null) {
             if (hashArray[hashVal].getKey() == key) {
-                hashArray[hashVal] = theLink;
-                return;
+                Item temp = hashArray[hashVal]; // Временное сохранение
+                hashArray[hashVal] = deletedItem; // Удаление элемента (помечаем как удаленный)
+                return temp; // Возвращаем удаленный элемент
             }
+            // Квадратичное пробирование
+            hashVal = (hashVal + stepSizeCounter(key, i)) % arraySize;
             i++;
-            hashVal = hashFunc(key, i);
-        }
-
-        hashArray[hashVal] = theLink;
-        itemCount++;
-    }
-
-    public void delete(int key) {
-        int i = 0;
-        int hashVal = hashFunc(key, i);
-
-        while (hashArray[hashVal] != null && i < arraySize) {
-            if (hashArray[hashVal] != DELETED && hashArray[hashVal].getKey() == key) {
-                hashArray[hashVal] = DELETED;
-                itemCount--;
-                return;
-            }
-            i++;
-            hashVal = hashFunc(key, i);
-        }
-    }
-
-    private void resize() {
-        System.out.println("Изменение размера хэш-таблицы с " + arraySize + " до " + (arraySize * 2));
-
-        Link[] oldArray = hashArray;
-        int oldSize = arraySize;
-
-        arraySize = getNextPrime(arraySize * 2);
-        hashArray = new Link[arraySize];
-        itemCount = 0;
-
-        for (int j = 0; j < oldSize; j++) {
-            if (oldArray[j] != null && oldArray[j] != DELETED) {
-                insert(new Link(oldArray[j].getKey()));
+            if (i >= arraySize) { // Предотвращение бесконечного цикла
+                break;
             }
         }
+        return null; // Элемент не найден
     }
 
-    public void displayTable() {
+    // Вывод содержимого таблицы
+    public void display() {
+        System.out.print("Table: ");
         for (int j = 0; j < arraySize; j++) {
-            System.out.print(j + ". ");
-            if (hashArray[j] == null) {
-                System.out.println("Пустой");
-            } else if (hashArray[j] == DELETED) {
-                System.out.println("Удаленный");
+            if (hashArray[j] != null) {
+                System.out.print(hashArray[j].getKey() + " ");
             } else {
-                hashArray[j].displayLink();
-                System.out.println();
+                System.out.print("** ");
             }
         }
+        System.out.println("");
     }
 
-    public int getItemCount() {
-        return itemCount;
-    }
+    // Класс Item для хранения данных
+    public static class Item {
+        private int key;
 
-    public int getArraySize() {
-        return arraySize;
-    }
-
-    private boolean isPrime(int num) {
-        if (num <= 1) return false;
-        if (num == 2) return true;
-        if (num % 2 == 0) return false;
-        for (int i = 3; i * i <= num; i += 2) {
-            if (num % i == 0) return false;
+        public Item(int key) {
+            this.key = key;
         }
-        return true;
-    }
 
-    private int getNextPrime(int num) {
-        while (!isPrime(num)) {
-            num++;
+        public int getKey() {
+            return key;
         }
-        return num;
     }
 }

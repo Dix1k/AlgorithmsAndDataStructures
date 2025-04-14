@@ -2,30 +2,46 @@ package LaboratoryWorkNo5;
 
 public class Main {
     public static void main(String[] args) {
-        OpenAddressingHashTable hashTable = new OpenAddressingHashTable(5);
+        OpenAddressingHashTable hashTable = new OpenAddressingHashTable(10); // Создаём таблицу размером 10
 
-        System.out.println("Начальный размер таблицы: " + hashTable.getArraySize());
-
-        // Вставка элементов
-        for (int i = 0; i < 20; i++) {
-            hashTable.insert(new Link(i));
-            System.out.println("Вставлен " + i +
-                    ", размер таблицы: " + hashTable.getArraySize() +
-                    ", предметов: " + hashTable.getItemCount());
+        // Вставка элементов (меньше, чем размер таблицы, чтобы избежать переполнения)
+        for (int i = 0; i < 8; i++) {
+            hashTable.insert(new OpenAddressingHashTable.Item(i));
+            System.out.println("Вставлен элемент с ключом: " + i);
         }
 
+        // Вывод таблицы
+        System.out.println("\nСостояние таблицы после вставки:");
+        hashTable.display();
+
         // Поиск элемента
-        Link found = hashTable.find(10);
-        if (found != null) {
-            System.out.println("Нашёл: " + found.getKey());
+        int searchKey = 5;
+        OpenAddressingHashTable.Item foundItem = hashTable.find(searchKey);
+        if (foundItem != null) {
+            System.out.println("\nЭлемент с ключом " + searchKey + " найден.");
+        } else {
+            System.out.println("\nЭлемент с ключом " + searchKey + " не найден.");
         }
 
         // Удаление элемента
-        hashTable.delete(10);
-        System.out.println("Предметов после удаления: " + hashTable.getItemCount());
+        int deleteKey = 5;
+        OpenAddressingHashTable.Item deletedItem = hashTable.delete(deleteKey);
+        if (deletedItem != null) {
+            System.out.println("\nЭлемент с ключом " + deleteKey + " удалён.");
+        } else {
+            System.out.println("\nЭлемент с ключом " + deleteKey + " не найден (удаление не выполнено).");
+        }
 
-        // Вывод итоговой таблицы
-        System.out.println("\nИтоговая хэш-таблица:");
-        hashTable.displayTable();
+        // Вывод таблицы после удаления
+        System.out.println("\nСостояние таблицы после удаления:");
+        hashTable.display();
+
+        // Проверка, что элемент удалён
+        foundItem = hashTable.find(deleteKey);
+        if (foundItem != null) {
+            System.out.println("\nЭлемент с ключом " + deleteKey + " всё ещё существует.");
+        } else {
+            System.out.println("\nЭлемент с ключом " + deleteKey + " больше не в таблице (успешно удалён).");
+        }
     }
 }
