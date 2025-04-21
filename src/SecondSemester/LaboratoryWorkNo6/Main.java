@@ -11,13 +11,13 @@ public class Main {
         graph.addVertex('D');
         graph.addVertex('E');
 
-        // Добавляем рёбра
-        graph.addEdge(0, 1); // A - B
-        graph.addEdge(1, 2); // B - C
-        graph.addEdge(0, 3); // A - D
-        graph.addEdge(3, 4); // D - E
+        // Добавляем рёбра, используя буквенные обозначения вершин
+        graph.addEdge('A', 'B'); // A - B
+        graph.addEdge('B', 'C'); // B - C
+        graph.addEdge('A', 'D'); // A - D
+        graph.addEdge('D', 'E'); // D - E
 
         System.out.println("Обход в ширину:");
-        graph.breadthFirstTraversal(); // Ожидаемый вывод: A B D C E
+        graph.breadthFirstTraversal('A'); // Начинаем обход с вершины A
     }
 }

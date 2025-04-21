@@ -28,19 +28,38 @@ public class Graph {
         vertexList[vertexNumber++] = new Vertex(label);
     }
 
-    public void addEdge(int start, int end) {
-        adjacencyList.get(start).add(end);
-        adjacencyList.get(end).add(start);
+    // Добавление ребра по буквенным обозначениям вершин
+    public void addEdge(char startLabel, char endLabel) {
+        int start = findVertexIndex(startLabel);
+        int end = findVertexIndex(endLabel);
+        if (start != -1 && end != -1) {
+            adjacencyList.get(start).add(end);
+            adjacencyList.get(end).add(start);
+        }
+    }
+
+    // Поиск индекса вершины по её буквенному обозначению
+    private int findVertexIndex(char label) {
+        for (int i = 0; i < vertexNumber; i++) {
+            if (vertexList[i].getLabel() == label) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     public void displayVertex(int v) {
         System.out.print(vertexList[v].getLabel() + " ");
     }
 
-    public void breadthFirstTraversal() {
-        vertexList[0].setVisited(true);
-        displayVertex(0);
-        queue.insert(0);
+    // Обход в ширину, начиная с вершины с заданным буквенным обозначением
+    public void breadthFirstTraversal(char startLabel) {
+        int startIndex = findVertexIndex(startLabel);
+        if (startIndex == -1) return;
+
+        vertexList[startIndex].setVisited(true);
+        displayVertex(startIndex);
+        queue.insert(startIndex);
 
         int v2;
         while (!queue.isEmpty()) {
